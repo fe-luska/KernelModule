@@ -18,9 +18,10 @@ int main() {
     // Abrir o arquivo /dev/kmsg
     int fd = open("/dev/kmsg", O_RDONLY);
     if (fd < 0) {
-        perror("Erro ao abrir o arquivo /dev/kmsg");
+        perror("Failed to open /dev/kmsg");
         exit(1);
     }
+    printf("ksmg opened!\n");
     struct pollfd pfd;
 
 

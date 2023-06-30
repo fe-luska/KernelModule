@@ -1,1 +1,0 @@
-cmd_/media/sf_so/KernelModule/modules/keylogger_mod.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /media/sf_so/KernelModule/modules/keylogger_mod.ko /media/sf_so/KernelModule/modules/keylogger_mod.o /media/sf_so/KernelModule/modules/keylogger_mod.mod.o;  true

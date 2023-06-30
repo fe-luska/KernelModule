@@ -1,1 +1,0 @@
-cmd_/media/sf_so/KernelModule/modules/Module.symvers := sed 's/ko$$/o/' /media/sf_so/KernelModule/modules/modules.order | scripts/mod/modpost -m -a  -o /media/sf_so/KernelModule/modules/Module.symvers -e -i Module.symvers   -T -

