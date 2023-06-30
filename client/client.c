@@ -9,6 +9,27 @@
 #define PORT 8080
 #define BUFFER_SIZE 1024
 
+void print_handler(char *buffer, int recv_bytes){
+	int i = 0, j = 0;
+	char aux[1024];
+	// Splits the received message back into individual words
+	while(i < recv_bytes){
+		if(buffer[i] != ' ' && buffer[i] != '\0'){
+			aux[j] = buffer[i];
+			i++;
+			j++;
+		} else if(buffer[i] != '\0'){
+			aux[j] = '\0';
+			printf("Remote send: %s\n", aux);
+			j = 0;
+			i++;
+		} else {
+			return;
+		}
+	}
+}
+
+
 int main() {
     int sock = 0;
     struct sockaddr_in serv_addr;
@@ -40,15 +61,18 @@ int main() {
 
     // Receive data from the server
     ssize_t recv_bytes;
-    while ((recv_bytes = recv(sock, buffer, BUFFER_SIZE - 1, 0)) > 0) {
+    while(1){
+ 	recv_bytes = recv(sock, buffer, BUFFER_SIZE - 1, 0);
+    	if (recv_bytes < 0) {
+        	perror("Failed to receive data from the server");
+        	exit(EXIT_FAILURE);
+    	}
         buffer[recv_bytes] = '\0';
-        printf("User pressed: %s\n", buffer);
+
+	// Prints the words separetly
+	print_handler(buffer, recv_bytes);
     }
 
-    if (recv_bytes < 0) {
-        perror("Failed to receive data from the server");
-        exit(EXIT_FAILURE);
-    }
 
     // Close the socket
     close(sock);

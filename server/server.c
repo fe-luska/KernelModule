@@ -15,7 +15,7 @@
 #define BUFFER_SIZE 1024
 
 int main() {
-    // Abrir o arquivo /dev/kmsg
+    // Opens /dev/kmsg
     int fd = open("/dev/kmsg", O_RDONLY);
     if (fd < 0) {
         perror("Failed to open /dev/kmsg");
