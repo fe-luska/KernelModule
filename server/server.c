@@ -3,12 +3,27 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <unistd.h>
+#include <sys/select.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <poll.h>
+
+#include "keys.h"
 
 #define PORT 8080
 #define BUFFER_SIZE 1024
 
 int main() {
-    int fd;
+    // Abrir o arquivo /dev/kmsg
+    int fd = open("/dev/kmsg", O_RDONLY);
+    if (fd < 0) {
+        perror("Erro ao abrir o arquivo /dev/kmsg");
+        exit(1);
+    }
+    struct pollfd pfd;
+
+
     int server_fd, new_socket;
     struct sockaddr_in address;
     int addrlen = sizeof(address);
@@ -42,8 +57,47 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
+    printf("Connection stablished!\n");
 
+    while(1){
+        pfd.fd = fd;
+	pfd.events = POLLIN;
 
+	if(poll(&pfd, fd + 1, 700) > 0){
+		
+		if (pfd.revents & POLLOUT) {
+			int b_read;
+
+			b_read = read(fd, buffer, BUFFER_SIZE - 1);
+			if (b_read < 0) {
+				perror("Failed to read from /dev/kmsg");
+				exit(EXIT_FAILURE);
+			}
+			if (b_read > 0){
+				buffer[b_read] = '\0';
+			}
+			printf("Sending: %s\n", buffer);
+			
+			int a = 0;
+			while(a < b_read){
+				if(atoi(&buffer[a]) >= 127){
+					buffer[a] = "126\0";
+				}
+			}
+	       }	
+			
+	}
+    }	
+    
+    
+    // closing the kmsg file
+    close(fd);
+
+    // closing the client socket
+    close(new_socket);
+
+    // closing the server
+    close(server_fd);
 
     return 0;
 }
