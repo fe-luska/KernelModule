@@ -1,8 +1,8 @@
 all:
 	gcc -o prog server.c
-	./prog
+	sudo ./prog
 run: 	
-	./prog
+	sudo ./prog
 compile:
 	gcc -o prog server.c
 

@@ -80,10 +80,13 @@ int main() {
 			
 			int a = 0;
 			while(a < b_read){
-				if(atoi(&buffer[a]) >= 127){
-					buffer[a] = "126\0";
+				if(send(new_socket, keys[atoi(&buffer[a])], 1, 0) == -1){
+				perror("Failed sending message to client");
+					exit(EXIT_FAILURE);
 				}
+				a++;
 			}
+
 	       }	
 			
 	}

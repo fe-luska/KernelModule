@@ -1,9 +1,9 @@
 #ifndef __KEYS_H__
 #define __KEYS_H__
 
-#define NUM_TECLAS 128
+#define KEY_NUM 128
 
-const char* teclas[NUM_TECLAS] = {
+const char* keys[KEY_NUM] = {
     "Reserved",
     "ESC",
     "1",
