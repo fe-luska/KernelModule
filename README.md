@@ -2,9 +2,9 @@
 O Linux Backdoor Project é um projeto que possibilita a comunicação entre uma máquina virtual com sistema operacional Linux e outro sistema operacional por meio de um servidor e um cliente. Além disso, o projeto inclui a implementação de um módulo de kernel para o sistema Linux, atuando como um agente backdoor para coletar informações dentro do kernel. O objetivo principal é permitir a troca de dados entre as duas máquinas usando uma conexão TCP/IP e, neste caso específico, os dados coletados são as entradas de teclado do usuário do sistema Ubuntu (Máquina Virtual).
 
 ## Autores
-Fernando Lucas Vieira Souza
-Pedro Grando
-Pedro 
+- Fernando Lucas Vieira Souza - 12703069
+- Pedro Antonio Bruno Grando - 12547166
+- Pedro Lucas Castro de Andrade - 11212289 
 
 ## Organização do Repositório
 ### Diretório "client":
